@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beaches Around the World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* Updated layout for a more dynamic and modern design */
+    body { font-family: 'Pacifico', cursive; margin: 0; background: #fef6e4; color: #2d3142; } /* deep slate for contrast */
+    header, main, footer { max-width: 1200px; margin: auto; padding: 1rem; }
+    header { background: linear-gradient(90deg, #a2d2ff 60%, #caf0f8 100%); color: #2d3142; padding: 2.5rem 1rem; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: 0 4px 24px #caf0f855; border: 3px solid #90e0ef; width: 100%; }
+    nav { margin: 1.5rem 0; text-align: center; }
+    nav a { color: #36b1bf; /* pastel teal */ margin: 0 1.5rem; text-decoration: none; font-weight: 600; font-family: 'Pacifico', cursive; font-size: 1.2rem; transition: color 0.2s; border-bottom: 2px solid transparent; padding-bottom: 2px; }
+    nav a:hover { color: #f67280; border-bottom: 2px solid #f67280; }
+    main { max-width: 1200px; margin: 2.5rem auto; background: #fff; border-radius: 22px; box-shadow: 0 4px 32px #caf0f155; padding: 2.5rem; border: 5px solid #90e0ef; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    section { margin-bottom: 2.5rem; grid-column: span 2; }
+    h1, h2, h3 { color: #2d3142; /* deep slate for headings */ margin-top: 0; font-family: 'Pacifico', cursive; letter-spacing: 1px; }
+    h1 { color: #f7d9e3; } /* light pink for the title */
+    h2 { color: #36b1bf; /* pastel teal for h2 */ font-size: 2rem; }
+    h3 { color: #f8b195; /* soft coral for h3 */ font-size: 1.8rem; }
+    p, li { color: #2d3142; }
+    ul { list-style: disc inside; color: #22577a; }
+    .flower-photo { display: block; margin: 2rem auto; max-width: 100%; border-radius: 18px; box-shadow: 0 6px 32px #fce1f188; border: 3px solid #d291bc; grid-column: span 2; }
+    footer { text-align: center; color: #d291bc; margin: 2.5rem 0; font-family: 'Quicksand', Arial, sans-serif; font-size: 1.1rem; border-top: 2px solid #fce1f1; padding-top: 1rem; width: 100%; }
+    .icon {
+      width: 50px;
+      height: 50px;
+      margin: 0.5rem;
+      display: inline-block;
+    }
+    body { font-size: 1.2rem; line-height: 1.6; color: #333; background-color: #fef6e4; }
+    button, img { outline: none; }
+    img { border: 2px solid transparent; }
+    img:focus { border: 2px solid #90e0ef; }
+    button { font-size: 1.2rem; padding: 0.8rem 1.5rem; border-radius: 8px; background-color: #90e0ef; color: #fff; border: none; cursor: pointer; }
+    button:focus { outline: 2px solid #90e0ef; }
+    a { color: #0077b6; text-decoration: underline; }
+    a:focus { outline: 2px solid #0077b6; }
+    .caption, p[style*='font-size:1.3rem'] { color: #355c7d !important; } /* deep blue for captions */
+
+    /* Poll Styles */
+    .poll-section { background: #f7d9e3; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 12px #a2d2ff33; }
+    .poll-section label { color: #22577a; font-size: 1.1rem; margin-right: 1.2rem; }
+    .poll-section button { background: #a2d2ff; color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-family: 'Pacifico', cursive; font-size: 1.1rem; cursor: pointer; margin-top: 1rem; }
+    .poll-section button:hover { background: #80cfa9; }
+    /* Quiz Styles */
+    .quiz-section { background: #ffe5b4; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 12px #a2d2ff33; }
+    .quiz-section label { color: #22577a; font-size: 1.1rem; margin-right: 1.2rem; }
+    .quiz-section button { background: #f7d9e3; color: #22577a; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-family: 'Pacifico', cursive; font-size: 1.1rem; cursor: pointer; margin-top: 1rem; }
+    .quiz-section button:hover { background: #a2d2ff; color: #fff; }
+
+    /* Animated Shell Styles */
+    #shell {
+      position: fixed;
+      left: 50vw;
+      top: 80vh;
+      width: 80px;
+      height: 80px;
+      z-index: 1000;
+      transition: left 0.2s linear, top 0.2s linear, transform 0.1s;
+      pointer-events: none;
+    }
+    /* Sand Drawing Pad Styles */
+    .sand-pad-section {
+      background: #ffe5b4;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 2px 12px #a2d2ff33;
+      text-align: center;
+    }
+    #sandPad {
+      background: #f7d9e3;
+      border: 3px dashed #a2d2ff;
+      border-radius: 12px;
+      cursor: crosshair;
+      margin: 1rem auto;
+      display: block;
+    }
+    /* Toggle Switch Styles */
+    .toggle-switch {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      z-index: 1100;
+    }
+    .toggle-switch input[type="checkbox"] {
+      display: none;
+    }
+    .slider {
+      width: 54px;
+      height: 28px;
+      background: #a2d2ff;
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .slider:before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    input[type="checkbox"]:checked + .slider {
+      background: #22223b;
+    }
+    input[type="checkbox"]:checked + .slider:before {
+      transform: translateX(26px);
+      background: #f7d9e3;
+    }
+    body.night-mode {
+      background: #22223b;
+      color: #f7d9e3;
+    }
+    body.night-mode header { background: linear-gradient(90deg, #22223b 60%, #4a4e69 100%); color: #f7d9e3; }
+    body.night-mode h1 { color: #f7d9e3; }
+    body.night-mode h2, body.night-mode h3 { color: #a2d2ff; }
+    body.night-mode .caption, body.night-mode p[style*='font-size:1.3rem'] { color: #a2d2ff !important; }
+    body.night-mode .mini-game, body.night-mode .poll-section, body.night-mode .quiz-section, body.night-mode .sand-pad-section {
+      background: #4a4e69 !important;
+      color: #f7d9e3 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle-switch" aria-label="Toggle Night/Day Mode">
+    <input type="checkbox" id="themeToggle">
+    <span class="slider"></span>
+    <span style="margin-left: 0.7rem; color: #a2d2ff; font-size: 1.1rem; font-family: 'Pacifico', cursive;">Night Mode</span>
+  </div>
+  <header>
+    <h1>Beaches Around the World</h1>
+    <p style="font-size:1.3rem; color:#22577a; margin-bottom:1.2rem;">Discover the most stunning beaches across the globe!</p>
+  </header>
+  <main>
+    <section id="about">
+      <h2>About Beaches</h2>
+      <img class="flower-photo" id="mainBeachImg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Aesthetic Beach" style="cursor:pointer;">
+      <p>Beaches are nature's paradise, offering breathtaking views, soothing waves, and endless relaxation. This website is dedicated to informing people about the beauty, benefits, and importance of beaches around the world. Whether you visit tropical islands, rugged coastlines, or serene shores, beaches provide a perfect escape from the hustle and bustle of daily life.</p>
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sun">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Seashell">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Wave">
+      </div>
+      <p>Beaches are nature's paradise, offering breathtaking views, soothing waves, and endless relaxation. This website is dedicated to informing people about the beauty, benefits, and importance of beaches around the world. Whether you visit tropical islands, rugged coastlines, or serene shores, beaches provide a perfect escape from the hustle and bustle of daily life.</p>
+      <div style="text-align: center; margin: 2rem 0;">
+        <button style="margin: 0.5rem; padding: 0.8rem 1.5rem; background-color: #90e0ef; color: #fff; border: none; border-radius: 8px; font-family: 'Pacifico', cursive; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" onclick="window.location.href='https://en.wikipedia.org/wiki/Bondi_Beach';">Bondi Beach</button>
+        <button style="margin: 0.5rem; padding: 0.8rem 1.5rem; background-color: #90e0ef; color: #fff; border: none; border-radius: 8px; font-family: 'Pacifico', cursive; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" onclick="window.location.href='https://en.wikipedia.org/wiki/Copacabana_(Rio_de_Janeiro)';">Copacabana</button>
+        <button style="margin: 0.5rem; padding: 0.8rem 1.5rem; background-color: #90e0ef; color: #fff; border: none; border-radius: 8px; font-family: 'Pacifico', cursive; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" onclick="window.location.href='https://en.wikipedia.org/wiki/Clearwater_Beach';">Clearwater Beach</button>
+      </div>
+      <ul>
+        <li><strong>Benefits:</strong> Relaxation, adventure, and connection with nature.</li>
+        <li><strong>Types:</strong> Sandy beaches, rocky shores, and coral reefs.</li>
+        <li><strong>Fun Fact:</strong> Beaches cover about 31% of the world's coastlines!</li>
+      </ul>
+      <h3>Exploring Beaches</h3>
+      <p>Exploring beaches is a wonderful way to experience the beauty of the natural world. From snorkeling in crystal-clear waters to enjoying sunsets on golden sands, beaches offer activities for everyone.</p>
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Palm Tree">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Beach Umbrella">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Starfish">
+      </div>
+      <ul>
+        <li><strong>Travel Tips:</strong> Pack sunscreen, stay hydrated, and respect local wildlife.</li>
+        <li><strong>Activities:</strong> Surfing, beachcombing, and building sandcastles.</li>
+        <li><strong>Famous Beaches:</strong> Bondi Beach in Australia, Copacabana in Brazil, and Maldives' pristine shores.</li>
+        <li><strong>Community:</strong> Join beach cleanups or participate in eco-friendly initiatives to preserve these natural wonders.</li>
+      </ul>
+      <p>My name is Nicole and I love traveling to beaches around the world. I enjoy the tranquility of the waves, the thrill of water sports, and the beauty of sunsets over the ocean. Beaches are my favorite destinations!</p>
+      <p>I have traveled to many places and explored some of the most aesthetically pleasing beaches. Among my favorite destinations are the stunning beaches in the Bahamas and Florida. The Bahamas offer crystal-clear turquoise waters, soft white sands, and vibrant marine life, making it a paradise for relaxation and adventure. Florida, on the other hand, boasts a variety of beaches, from the lively shores of Miami Beach to the serene beauty of Clearwater Beach. Each destination has its unique charm and unforgettable experiences!</p>
+    </section>
+    <!-- Mini Game: Find the Hidden Shell -->
+    <section class="mini-game" aria-label="Find the Hidden Shell Game" style="background: #f7d9e3; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 12px #a2d2ff33; text-align: center;">
+      <h2 style="color: #36b1bf;">Mini Game: Find the Hidden Shell!</h2>
+      <p style="color: #22577a;">Click on the beach tiles to find the hidden shell. Good luck!</p>
+      <div id="shellGameBoard" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 340px; margin: 1.5rem auto;"></div>
+      <div id="shellGameResult" style="margin-top:1rem;font-weight:bold;color:#f67280;"></div>
+      <button onclick="resetShellGame()" style="margin-top:1rem; background: #a2d2ff; color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-family: 'Pacifico', cursive; font-size: 1.1rem; cursor: pointer;">Play Again</button>
+    </section>
+    <!-- Poll Section -->
+    <section class="poll-section" aria-label="Favorite Beach Poll" style="background: #f7d9e3; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 12px #a2d2ff33;">
+      <h2 style="color: #36b1bf;">Which is your favorite type of beach?</h2>
+      <form id="beachPoll">
+        <label><input type="radio" name="beachType" value="Tropical"> Tropical</label>
+        <label><input type="radio" name="beachType" value="Rocky"> Rocky</label>
+        <label><input type="radio" name="beachType" value="Urban"> Urban</label>
+        <label><input type="radio" name="beachType" value="Remote"> Remote</label><br>
+        <button type="button" onclick="submitPoll()">Vote</button>
+      </form>
+      <div id="pollResult" style="margin-top:1rem;font-weight:bold;"></div>
+    </section>
+    <!-- Quiz Section -->
+    <section class="quiz-section" aria-label="Beach Quiz" style="background: #ffe5b4; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 12px #a2d2ff33;">
+      <h2 style="color: #36b1bf;">Beach Personality Quiz</h2>
+      <form id="beachQuiz">
+        <label>What do you like most at the beach?</label><br>
+        <label><input type="radio" name="quizQ" value="Relaxing"> Relaxing</label>
+        <label><input type="radio" name="quizQ" value="Swimming"> Swimming</label>
+        <label><input type="radio" name="quizQ" value="Exploring"> Exploring</label>
+        <label><input type="radio" name="quizQ" value="Playing"> Playing</label><br>
+        <button type="button" onclick="submitQuiz()">Get Result</button>
+      </form>
+      <div id="quizResult" style="margin-top:1rem;font-weight:bold;"></div>
+    </section>
+    <!-- Animated Shell -->
+    <img id="shell" src="https://cdn-icons-png.flaticon.com/512/616/616494.png" alt="Animated Shell">
+    <audio id="clickSound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae5b2.mp3" preload="auto"></audio>
+    <!-- Sand Drawing Pad -->
+    <section class="sand-pad-section" aria-label="Virtual Sand Drawing Pad">
+      <h2 style="color: #36b1bf;">Draw in the Sand!</h2>
+      <canvas id="sandPad" width="400" height="200" aria-label="Sand Drawing Pad"></canvas>
+      <button onclick="clearSandPad()" style="background: #a2d2ff; color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-family: 'Pacifico', cursive; font-size: 1.1rem; cursor: pointer;">Clear Sand</button>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Beaches Around the World. All rights reserved.</p>
+  </footer>
+  <script>
+    // Mini Game: Find the Hidden Shell
+    const shellTiles = 9;
+    let shellIndex = Math.floor(Math.random() * shellTiles);
+    const board = document.getElementById('shellGameBoard');
+    const result = document.getElementById('shellGameResult');
+    function renderShellGame() {
+      board.innerHTML = '';
+      result.textContent = '';
+      for (let i = 0; i < shellTiles; i++) {
+        const tile = document.createElement('button');
+        tile.setAttribute('aria-label', 'Beach tile');
+        tile.style.width = '90px';
+        tile.style.height = '90px';
+        tile.style.background = '#a2d2ff';
+        tile.style.border = '2px solid #36b1bf';
+        tile.style.borderRadius = '12px';
+        tile.style.margin = '0';
+        tile.style.fontSize = '2rem';
+        tile.style.cursor = 'pointer';
+        tile.style.transition = 'background 0.2s';
+        tile.onclick = function() {
+          if (i === shellIndex) {
+            tile.innerHTML = '🐚';
+            result.textContent = 'You found the hidden shell!';
+            tile.style.background = '#b5ead7';
+            rainConfetti();
+          } else {
+            tile.innerHTML = '🌊';
+            result.textContent = 'Try again!';
+            tile.style.background = '#ffe5b4';
+          }
+          // Disable all tiles after a win
+          Array.from(board.children).forEach(btn => btn.disabled = true);
+          tile.disabled = false;
+        };
+        board.appendChild(tile);
+      }
+    }
+    function resetShellGame() {
+      shellIndex = Math.floor(Math.random() * shellTiles);
+      renderShellGame();
+    }
+    renderShellGame();
+    // Confetti Animation
+    function rainConfetti() {
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-40px';
+        confetti.style.width = '12px';
+        confetti.style.height = '12px';
+        confetti.style.background = `hsl(${Math.random()*360}, 80%, 75%)`;
+        confetti.style.borderRadius = '50%';
+        confetti.style.opacity = '0.85';
+        confetti.style.zIndex = 2000;
+        confetti.style.pointerEvents = 'none';
+        confetti.style.transition = 'top 2.2s linear, left 1.2s linear';
+        document.body.appendChild(confetti);
+        setTimeout(() => {
+          confetti.style.top = '100vh';
+          confetti.style.left = (parseFloat(confetti.style.left) + (Math.random() * 100 - 50)) + 'px';
+        }, 10);
+        setTimeout(() => {
+          confetti.remove();
+        }, 2300);
+      }
+    }
+    // Poll
+    function submitPoll() {
+      const poll = document.getElementById('beachPoll');
+      const result = document.getElementById('pollResult');
+      const choice = poll.beachType.value;
+      if (choice) {
+        result.textContent = `Thanks for voting! You chose: ${choice} beach.`;
+      } else {
+        result.textContent = 'Please select an option.';
+      }
+    }
+    // Quiz
+    function submitQuiz() {
+      const quiz = document.getElementById('beachQuiz');
+      const result = document.getElementById('quizResult');
+      const choice = quiz.quizQ.value;
+      let msg = '';
+      if (choice === 'Relaxing') msg = 'You love to chill and soak up the sun!';
+      else if (choice === 'Swimming') msg = 'You are energetic and love the waves!';
+      else if (choice === 'Exploring') msg = 'You are adventurous and curious!';
+      else if (choice === 'Playing') msg = 'You bring fun and excitement to the beach!';
+      else msg = 'Please select an option.';
+      result.textContent = msg;
+    }
+    // Animated Shell (replaces sun)
+    const shell = document.getElementById('shell');
+    let shellTimeout;
+    document.addEventListener('mousemove', (e) => {
+      shell.style.left = (e.clientX - 40) + 'px';
+      shell.style.top = (e.clientY + 30) + 'px';
+    });
+    document.addEventListener('click', () => {
+      shell.style.transform = 'scale(1.2) rotate(-10deg)';
+      clearTimeout(shellTimeout);
+      shellTimeout = setTimeout(() => {
+        shell.style.transform = '';
+      }, 200);
+    });
+    // Sand Drawing Pad
+    const sandPad = document.getElementById('sandPad');
+    const sandCtx = sandPad.getContext('2d');
+    let drawing = false;
+    sandPad.addEventListener('mousedown', (e) => {
+      drawing = true;
+      sandCtx.beginPath();
+      sandCtx.moveTo(e.offsetX, e.offsetY);
+    });
+    sandPad.addEventListener('mousemove', (e) => {
+      if (drawing) {
+        sandCtx.lineTo(e.offsetX, e.offsetY);
+        sandCtx.strokeStyle = '#bfaee0';
+        sandCtx.lineWidth = 4;
+        sandCtx.lineCap = 'round';
+        sandCtx.stroke();
+      }
+    });
+    sandPad.addEventListener('mouseup', () => {
+      drawing = false;
+    });
+    sandPad.addEventListener('mouseleave', () => {
+      drawing = false;
+    });
+    function clearSandPad() {
+      sandCtx.clearRect(0, 0, sandPad.width, sandPad.height);
+    }
+    // Theme Toggle (fix for slider click)
+    const themeToggle = document.getElementById('themeToggle');
+    const slider = document.querySelector('.toggle-switch .slider');
+    slider.addEventListener('click', function() {
+      themeToggle.checked = !themeToggle.checked;
+      document.body.classList.toggle('night-mode', themeToggle.checked);
+    });
+    themeToggle.addEventListener('change', function() {
+      document.body.classList.toggle('night-mode', this.checked);
+    });
+    // Main Image Clickable
+    document.getElementById('mainBeachImg').addEventListener('click', function() {
+      alert('Fun Fact: The world’s longest beach is Praia do Cassino in Brazil, stretching over 150 miles!');
+    });
+    // Sand Animation: Sand trail follows the cursor
+    document.addEventListener('mousemove', function(e) {
+      const sandParticle = document.createElement('div');
+      sandParticle.style.position = 'fixed';
+      sandParticle.style.left = (e.clientX - 6) + 'px';
+      sandParticle.style.top = (e.clientY - 6) + 'px';
+      sandParticle.style.width = '12px';
+      sandParticle.style.height = '12px';
+      sandParticle.style.background = '#ffe5b4';
+      sandParticle.style.borderRadius = '50%';
+      sandParticle.style.opacity = '0.7';
+      sandParticle.style.pointerEvents = 'none';
+      sandParticle.style.zIndex = 2000;
+      sandParticle.style.boxShadow = '0 2px 8px #f7d9e3';
+      document.body.appendChild(sandParticle);
+      setTimeout(() => {
+        sandParticle.style.opacity = '0';
+      }, 600);
+      setTimeout(() => {
+        sandParticle.remove();
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
